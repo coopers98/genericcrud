@@ -1,0 +1,20 @@
+{
+  "name": "coopers98/genericcrud",
+  "type": "library",
+  "description": "A GenericCRUD controller trait and corresponding views",
+  "keywords": [
+    "laravel",
+    "crud",
+    "scaffold"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cooper Sellers",
+      "email": "coopersellers@yahoo.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0"
+  }
+}
