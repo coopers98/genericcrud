@@ -16,7 +16,6 @@ use View;
 
 trait GenericCRUD {
 
-	protected $model_name = 'Generic';
 	protected $table_name = 'generic';
 	protected $columns = [ ];
 	protected $ignored_columns = [ 'created_at', 'updated_at', 'deleted_at' ];
