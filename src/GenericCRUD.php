@@ -1,11 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Cooper
- * Date: 3/1/2015
- * Time: 12:46 PM
- */
-
 namespace coopers98\GenericCRUD;
 
 
