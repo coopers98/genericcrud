@@ -16,7 +16,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "coopers98\\GenericCRUD\\": "src/GenericCRUD"
+      "coopers98\\GenericCRUD\\": "src"
     }
   },
   "require": {
