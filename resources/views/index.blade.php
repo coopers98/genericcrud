@@ -17,17 +17,19 @@
                                 <a href="{{ route( $resource_link . '.create' ) }}" class="btn btn-info btn-sm"><i
                                             class="fa fa-plus"></i>&nbsp;
                                     New {{ str_singular( $table_name ) }}</a>&nbsp;
-                                <div class="btn-group"><a href="{{ link_to_route( $resource_link . '.create' ) }}" data-toggle="dropdown"
+                                <div class="btn-group"><a href="{{ link_to_route( $resource_link . '.create' ) }}"
+                                                          data-toggle="dropdown"
                                                           class="btn btn-warning btn-sm dropdown-toggle"><i
                                                 class="fa fa-wrench"></i>&nbsp;
                                         Tools</a>
                                     <ul class="dropdown-menu pull-right">
-                                        <li><a href="{{ route( 'admin.generic.export', [ 't' => $table_name ] ) }}">Export to CSV</a></li>
+                                        <li><a href="{{ route( 'admin.generic.export', [ 't' => $table_name ] ) }}">Export
+                                                to CSV</a></li>
 
                                         @foreach( $tool_entries as $entry )
                                             <li><a href="{{ $entry['url'] }}">{{ $entry['title'] }}</a></li>
-                                        @endforeach
-<!--
+                                            @endforeach
+                                                    <!--
                                         <li><a href="#">Export to Excel</a></li>
                                         <li><a href="#">Export to XML</a></li>
                                         <li class="divider"></li>
@@ -46,7 +48,7 @@
                                                                             <th><input type="checkbox" class="checkall"/></th>
                                     -->
                                     <?php foreach( $columns as $col => $col_info ) :
-                                    if (in_array( $col, $ignored_columns )) {
+                                    if ( in_array( $col, $ignored_columns ) ) {
                                         continue;
                                     }
 
@@ -63,19 +65,20 @@
                                                                             <td><input type="checkbox"/></td>
                                     -->
                                     <?php
-                                    foreach ($columns as $col => $col_info) {
-                                        if (in_array( $col, $ignored_columns )) {
+                                    foreach ( $columns as $col => $col_info ) {
+                                        if ( in_array( $col, $ignored_columns ) ) {
                                             continue;
                                         }
 
                                         echo '<td>';
-                                        switch ($col_info['ShortType']) {
+                                        switch ( $col_info['ShortType'] ) {
                                             case 'int':
                                             case 'string':
                                             case 'float':
 
-                                                if ($col == 'id') {
-                                                    echo link_to_route( $resource_link . '.show', $item->id, [ $item->id ] );
+                                                if ( $col == 'id' ) {
+                                                    echo link_to_route( $resource_link . '.show', $item->id,
+                                                            [ $item->id ] );
                                                 } else {
                                                     echo $item->{$col};
                                                 }
@@ -94,8 +97,9 @@
 
                                     ?>
                                     <td>
-                                        <a href="<?php echo route( $resource_link . '.show', [ $item->id ] ); ?>" class="btn btn-default btn-xs">
-                                        <i class="fa fa-edit"></i>&nbsp;
+                                        <a href="<?php echo route( $resource_link . '.show', [ $item->id ] ); ?>"
+                                           class="btn btn-default btn-xs">
+                                            <i class="fa fa-edit"></i>&nbsp;
                                             View
                                         </a>
 

@@ -6,7 +6,7 @@
  * Time: 12:46 PM
  */
 
-namespace Legatus\Traits;
+namespace coopers98\GenericCRUD;
 
 
 use DB;
@@ -23,12 +23,12 @@ trait GenericCRUD {
 	protected $readonly_columns = array( 'id' );  //  default to id being readonly
 	protected $date_columns = [ ];
 	protected $resourceLink = 'generic';
-	protected $masterTemplate = 'generic.master';
-	protected $showView = 'generic.show';
-	protected $indexView = 'generic.index';
-	protected $confirmDeleteView = 'generic.confirm_delete';
-	protected $editView = 'generic.edit';
-	protected $createView = 'generic.create';
+	protected $masterTemplate = 'genericcrud::master';
+	protected $showView = 'genericcrud::show';
+	protected $indexView = 'genericcrud::index';
+	protected $confirmDeleteView = 'genericcrud::confirm_delete';
+	protected $editView = 'genericcrud::edit';
+	protected $createView = 'genericcrud::create';
 	protected $extraViewValues = [ ];
 	protected $toolEntries = [ ];
 
@@ -285,7 +285,6 @@ trait GenericCRUD {
 	}
 
 	public function authorizeList() {
-		return true;
 	}
 
 	public function authorizeShow() {

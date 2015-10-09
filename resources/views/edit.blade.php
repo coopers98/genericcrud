@@ -25,7 +25,7 @@
                 'form-horizontal'
                 ] ) !!}
 
-                @include( 'generic.form' )
+                @include( 'genericcrud::form' )
 
                 {!! Form::close() !!}
 
