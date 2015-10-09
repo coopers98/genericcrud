@@ -10,7 +10,9 @@
 
 namespace coopers98\GenericCRUD;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
+use Route;
 
 class GenericCRUDServiceProvider extends ServiceProvider {
 
@@ -29,6 +31,21 @@ class GenericCRUDServiceProvider extends ServiceProvider {
 	public function boot() {
 		$viewPath = __DIR__ . '/../resources/views';
 		$this->loadViewsFrom( $viewPath, 'genericcrud' );
+
+		if ( ! $this->app->routesAreCached() ) {
+			Route::get( '/coopers98/genericcrud/export',
+				[
+					'as' => 'coopers98.genericcrud.export',
+					function ( Request $request ) {
+						$table = $request->input( 't' );
+						\coopers98\GenericCRUD\Exporter::export( $table );
+					}
+				] );
+
+
+//    $router->get( '/genericImport', [ 'as' => 'admin.generic.import', 'uses' => 'Admin\DashboardController@genericImport' ] );
+
+		}
 	}
 
 	public function register() {

@@ -24,6 +24,11 @@ In your app config, add the `GenericCRUD` to the providers array.
 Usage
 -----
 
+Be warned that this isn't really a turn key package right now.  You'll likely need to dive into the source a little to
+understand how it is all going.  Fear not, it is pretty straight forward and shouldn't be too hard to follow.
+
+
+
 This is a trait so use it on a Controller that you want to have the Generic CRUD functionality on.
 
 In your routes.php file, add a resource
@@ -104,6 +109,10 @@ There are also authorization checks called for each action.
 	}
 ```
 
+----
+
+This package also includes a generic table exporter that uses the League/CSV package to export the given
+index view as a csv file.
 
 ### License
 

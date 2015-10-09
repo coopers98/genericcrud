@@ -17,13 +17,13 @@
                                 <a href="{{ route( $resource_link . '.create' ) }}" class="btn btn-info btn-sm"><i
                                             class="fa fa-plus"></i>&nbsp;
                                     New {{ str_singular( $table_name ) }}</a>&nbsp;
-                                <div class="btn-group"><a href="{{ link_to_route( $resource_link . '.create' ) }}"
+                                <div class="btn-group dropdown"><a href="#"
                                                           data-toggle="dropdown"
                                                           class="btn btn-warning btn-sm dropdown-toggle"><i
                                                 class="fa fa-wrench"></i>&nbsp;
                                         Tools</a>
                                     <ul class="dropdown-menu pull-right">
-                                        <li><a href="{{ route( 'admin.generic.export', [ 't' => $table_name ] ) }}">Export
+                                        <li><a href="{{ route( 'coopers98.genericcrud.export', [ 't' => $table_name ] ) }}">Export
                                                 to CSV</a></li>
 
                                         @foreach( $tool_entries as $entry )

@@ -21,6 +21,6 @@
   },
   "require": {
     "php": ">=5.5.9",
-    "illuminate/http": "5.1.*"
+    "league/csv": "~7.0"
   }
 }
