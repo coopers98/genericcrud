@@ -9,10 +9,11 @@ use View;
 
 trait GenericCRUD {
 
+	protected $dbConnection = 'default';
 	protected $table_name = 'generic';
 	protected $columns = [ ];
 	protected $ignored_columns = [ 'created_at', 'updated_at', 'deleted_at' ];
-	protected $readonly_columns = array( 'id' );  //  default to id being readonly
+	protected $readonly_columns = [ 'id', '_id' ];  //  default to id being readonly
 	protected $date_columns = [ ];
 	protected $resourceLink = 'generic';
 	protected $masterTemplate = 'genericcrud::master';
@@ -69,9 +70,10 @@ trait GenericCRUD {
 	 */
 	protected function populateColumns() {
 
-		$columns = DB::select( DB::raw( 'SHOW FIELDS FROM ' . $this->table_name ) );
+		$columns = DB::connection( $this->dbConnection )->select( DB::raw( 'SHOW FIELDS FROM ' . $this->table_name ) );
 
 		foreach ( $columns as $column ) {
+
 			$this->columns[ $column->Field ] = [
 				'Type'      => $column->Type,
 				'Null'      => $column->Null,
@@ -104,7 +106,7 @@ trait GenericCRUD {
 		$limit = $request->input( 'limit', 25 );
 		$limit = $limit > 1000 ? 1000 : $limit;
 
-		$items = DB::table( $this->table_name )->paginate( $limit );
+		$items = DB::connection( $this->dbConnection )->table( $this->table_name )->paginate( $limit );
 
 		return View::make( $this->indexView )
 		           ->with( 'masterTemplate', $this->masterTemplate )
@@ -159,7 +161,7 @@ trait GenericCRUD {
 			}
 		}
 
-		DB::table( $this->table_name )->insert( $updates );
+		DB::connection( $this->dbConnection )->table( $this->table_name )->insert( $updates );
 
 		return redirect()->route( $this->resourceLink . '.index' )
 		                 ->with( 'message', 'Entry Created' );
@@ -176,9 +178,13 @@ trait GenericCRUD {
 	public function show( $id ) {
 		$this->authorizeShow();
 
-		$entry = DB::table( $this->table_name )->find( $id );
+		$entry = DB::connection( $this->dbConnection )->table( $this->table_name )->find( $id );
+		if ( is_array( $entry ) ) {
+			$entry = json_decode( json_encode( $entry ), false );
+		}
 
 		return View::make( $this->showView )
+		           ->with( 'id', $id )
 		           ->with( 'masterTemplate', $this->masterTemplate )
 		           ->with( 'data', $entry )
 		           ->with( 'columns', $this->columns )
@@ -200,9 +206,14 @@ trait GenericCRUD {
 	public function edit( $id ) {
 		$this->authorizeEdit();
 
-		$entry = DB::table( $this->table_name )->find( $id );
+		$entry = DB::connection( $this->dbConnection )->table( $this->table_name )->find( $id );
+		if ( is_array( $entry ) ) {
+			$entry = json_decode( json_encode( $entry ), false );
+		}
+
 
 		return View::make( $this->editView )
+		           ->with( 'id', $id )
 		           ->with( 'masterTemplate', $this->masterTemplate )
 		           ->with( 'data', $entry )
 		           ->with( 'columns', $this->columns )
@@ -233,7 +244,7 @@ trait GenericCRUD {
 			}
 		}
 
-		DB::table( $this->table_name )
+		DB::connection( $this->dbConnection )->table( $this->table_name )
 		  ->where( 'id', $id )
 		  ->update( $updates );
 
@@ -256,7 +267,11 @@ trait GenericCRUD {
 
 		if ( ! $confirmed ) {
 
-			$entry = DB::table( $this->table_name )->find( $id );
+			$entry = DB::connection( $this->dbConnection )->table( $this->table_name )->find( $id );
+			if ( is_array( $entry ) ) {
+				$entry = json_decode( json_encode( $entry ), false );
+			}
+
 
 			return View::make( $this->confirmDeleteView )
 			           ->with( 'masterTemplate', $this->masterTemplate )
@@ -269,8 +284,17 @@ trait GenericCRUD {
 		}
 
 
-		//  THIS WILL NOT SUPPORT SOFT DELETES!!
-		DB::table( $this->table_name )->where( 'id', '=', $id )->delete();
+		if ( array_key_exists( 'deleted_at', $this->columns ) ) {
+
+			//  Soft delete
+			DB::connection( $this->dbConnection )
+			  ->table( $this->table_name )
+			  ->where( 'id', '=', $id )
+			  ->update( 'deleted_at', time() );
+
+		} else {
+			DB::connection( $this->dbConnection )->table( $this->table_name )->where( 'id', '=', $id )->delete();
+		}
 
 		return redirect()->route( $this->resourceLink . '.index' )
 		                 ->with( 'message', 'Entry deleted' );

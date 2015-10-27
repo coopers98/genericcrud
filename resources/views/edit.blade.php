@@ -21,7 +21,7 @@
                     </div>
                 @endif
 
-                {!! Form::model( $data, ['route' => [ $resource_link . '.update', $data->id], 'method' => 'PATCH', 'class' =>
+                {!! Form::model( $data, ['route' => [ $resource_link . '.update', $id], 'method' => 'PATCH', 'class' =>
                 'form-horizontal'
                 ] ) !!}
 

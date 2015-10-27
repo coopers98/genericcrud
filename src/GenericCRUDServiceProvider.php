@@ -41,10 +41,6 @@ class GenericCRUDServiceProvider extends ServiceProvider {
 						\coopers98\GenericCRUD\Exporter::export( $table );
 					}
 				] );
-
-
-//    $router->get( '/genericImport', [ 'as' => 'admin.generic.import', 'uses' => 'Admin\DashboardController@genericImport' ] );
-
 		}
 	}
 

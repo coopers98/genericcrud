@@ -25,12 +25,14 @@
                 //  into another table
                 //
                 switch ( $col_info['ShortType'] ) {
-
+                    case '_id':
+                            echo 'MongoDB ID';
+                            break;
                     case 'int':
                     case 'float':
                     case 'double':
                     case 'decimal':
-                        echo Form::text( $col, Input::old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                            echo Form::text( $col, Input::old( $col ), $readonly, [ 'class' => 'form-control' ] );
                         break;
                     case 'string':
                         if ( isset( $col_info['length'] ) && ! is_numeric( $col_info['length'] ) ) {

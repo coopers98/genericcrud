@@ -18,12 +18,13 @@
                                             class="fa fa-plus"></i>&nbsp;
                                     New {{ str_singular( $table_name ) }}</a>&nbsp;
                                 <div class="btn-group dropdown"><a href="#"
-                                                          data-toggle="dropdown"
-                                                          class="btn btn-warning btn-sm dropdown-toggle"><i
+                                                                   data-toggle="dropdown"
+                                                                   class="btn btn-warning btn-sm dropdown-toggle"><i
                                                 class="fa fa-wrench"></i>&nbsp;
                                         Tools</a>
                                     <ul class="dropdown-menu pull-right">
-                                        <li><a href="{{ route( 'coopers98.genericcrud.export', [ 't' => $table_name ] ) }}">Export
+                                        <li>
+                                            <a href="{{ route( 'coopers98.genericcrud.export', [ 't' => $table_name ] ) }}">Export
                                                 to CSV</a></li>
 
                                         @foreach( $tool_entries as $entry )
@@ -59,7 +60,12 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach( $items as $item ) : ?>
+                                <?php foreach( $items as $item ) :
+
+                                if ( is_array( $item ) ) {
+                                    $item = json_decode( json_encode( $item ), FALSE );
+                                }
+                                ?>
                                 <tr>
                                     <!--
                                                                             <td><input type="checkbox"/></td>
@@ -69,7 +75,6 @@
                                         if ( in_array( $col, $ignored_columns ) ) {
                                             continue;
                                         }
-
                                         echo '<td>';
                                         switch ( $col_info['ShortType'] ) {
                                             case 'int':
@@ -77,8 +82,14 @@
                                             case 'float':
 
                                                 if ( $col == 'id' ) {
+                                                    $id = $item->id;
                                                     echo link_to_route( $resource_link . '.show', $item->id,
                                                             [ $item->id ] );
+                                                } elseif ( $col == '_id' ) {
+                                                    $id = $item->{'_id'}->{'$id'};
+                                                    echo link_to_route( $resource_link . '.show', $item->{'_id'}->{'$id'},
+                                                            [ $item->{'_id'}->{'$id'} ] );
+
                                                 } else {
                                                     echo $item->{$col};
                                                 }
@@ -97,7 +108,7 @@
 
                                     ?>
                                     <td>
-                                        <a href="<?php echo route( $resource_link . '.show', [ $item->id ] ); ?>"
+                                        <a href="<?php echo route( $resource_link . '.show', [ $id ] ); ?>"
                                            class="btn btn-default btn-xs">
                                             <i class="fa fa-edit"></i>&nbsp;
                                             View
