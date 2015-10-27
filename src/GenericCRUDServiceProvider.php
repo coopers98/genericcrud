@@ -37,8 +37,9 @@ class GenericCRUDServiceProvider extends ServiceProvider {
 				[
 					'as' => 'coopers98.genericcrud.export',
 					function ( Request $request ) {
-						$table = $request->input( 't' );
-						\coopers98\GenericCRUD\Exporter::export( $table );
+						$table      = $request->input( 't' );
+						$connection = $request->input( 'db', 'default' );
+						\coopers98\GenericCRUD\Exporter::export( $table, $connection );
 					}
 				] );
 		}
