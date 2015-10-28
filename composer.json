@@ -21,6 +21,7 @@
   },
   "require": {
     "php": ">=5.5.9",
-    "league/csv": "~7.0"
+    "league/csv": "~7.0",
+    "laravelcollective/html": "5.1.*"
   }
 }
