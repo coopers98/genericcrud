@@ -49,7 +49,11 @@
                             echo Form::text( $col, Input::old( $col ), $readonly, [ 'class' => 'form-control' ] );
                         }
                         break;
-
+                    case 'text':
+                    case 'mediumtext':
+                    case 'longtext':
+                            echo Form::textarea( $col, Input::old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                        break;
                     case 'boolean':
                         echo form::checkbox( $col, $col, Input::old( $col ), $readonly, [ 'class' => 'form-control' ] );
                         break;
