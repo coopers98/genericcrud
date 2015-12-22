@@ -10,7 +10,7 @@
             <div class="panel-body pan">
 
 
-                @if (count($errors) > 0)
+                @if (isset( $errors ) && $errors && count($errors) > 0)
                     <div class="alert alert-danger">
                         <strong>Whoops!</strong> There were some problems with your input.<br><br>
                         <ul>
