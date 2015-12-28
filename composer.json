@@ -16,8 +16,11 @@
   ],
   "autoload": {
     "psr-4": {
-      "coopers98\\GenericCRUD\\": "src"
-    }
+      "coopers98\\GenericCRUD\\": "src/"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
   },
   "require": {
     "php": ">=5.5.9",

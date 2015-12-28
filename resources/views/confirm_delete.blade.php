@@ -51,11 +51,11 @@
 
 
                     <div class="col-lg-3">
-                        <?=link_to_route( $resource_link . '.show', 'Cancel', [ $data->id ],
-                                [ 'class' => "btn btn-info" ] )?>
+                        <a href="<?=route( $resource_link . '.show', [ $data->id ] ) ?>" class="btn btn-info">
+                            Cancel</a>
                     </div>
                     <div class="col-lg-6">
-                        <?php echo delete_form( [ $resource_link . '.destroy', $data->id ], true ); ?>
+                        <?php echo crud_delete_form( [ $resource_link . '.destroy', $data->id ], true ); ?>
                     </div>
                     <div class="clearfix"></div>
                 </div>

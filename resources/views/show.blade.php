@@ -48,7 +48,7 @@
                                 [ 'class' => "btn btn-info" ] )?>
                     </div>
                     <div class="col-lg-6">
-                        <?php echo delete_form( [ $resource_link . '.destroy', $id ] ); ?>
+                        <?php echo crud_delete_form( [ $resource_link . '.destroy', $id ] ); ?>
                     </div>
                     <div class="clearfix"></div>
 

@@ -60,12 +60,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <?php foreach( $items as $item ) :
-
-                                if ( is_array( $item ) ) {
-                                    $item = json_decode( json_encode( $item ), FALSE );
-                                }
-                                ?>
+                                <?php foreach( $items as $item ) : ?>
                                 <tr>
                                     <!--
                                                                             <td><input type="checkbox"/></td>
@@ -75,6 +70,7 @@
                                         if ( in_array( $col, $ignored_columns ) ) {
                                             continue;
                                         }
+
                                         echo '<td>';
                                         switch ( $col_info['ShortType'] ) {
                                             case 'int':
@@ -82,14 +78,8 @@
                                             case 'float':
 
                                                 if ( $col == 'id' ) {
-                                                    $id = $item->id;
-                                                    echo link_to_route( $resource_link . '.show', $item->id,
-                                                            [ $item->id ] );
-                                                } elseif ( $col == '_id' ) {
-                                                    $id = $item->{'_id'}->{'$id'};
-                                                    echo link_to_route( $resource_link . '.show', $item->{'_id'}->{'$id'},
-                                                            [ $item->{'_id'}->{'$id'} ] );
-
+                                                    $route = route( $resource_link . '.show', [ $item->id ] );
+                                                    echo "<a href='$route'>" . $item->id . '</a>';
                                                 } else {
                                                     echo $item->{$col};
                                                 }
@@ -108,7 +98,7 @@
 
                                     ?>
                                     <td>
-                                        <a href="<?php echo route( $resource_link . '.show', [ $id ] ); ?>"
+                                        <a href="<?php echo route( $resource_link . '.show', [ $item->id ] ); ?>"
                                            class="btn btn-default btn-xs">
                                             <i class="fa fa-edit"></i>&nbsp;
                                             View
