@@ -10,6 +10,7 @@
 
 namespace coopers98\GenericCRUD;
 
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Http\Request;
 use Illuminate\Support\ServiceProvider;
 use Route;
@@ -46,6 +47,11 @@ class GenericCRUDServiceProvider extends ServiceProvider {
 	}
 
 	public function register() {
+
+		$this->app->register(\Collective\Html\HtmlServiceProvider::class);
+
+		AliasLoader::getInstance()->alias("Form",\Collective\Html\FormFacade::class);
+		AliasLoader::getInstance()->alias("Html",\Collective\Html\FormFacade::class);
 
 	}
 }

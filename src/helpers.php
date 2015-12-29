@@ -17,3 +17,14 @@ if ( ! function_exists( 'crud_delete_form' ) ) {
 		return $form .= Form::close();
 	}
 }
+
+
+if ( ! function_exists( 'crud_old' ) ) {
+	function crud_old( $value ) {
+		$request = app( 'request' );
+		if ( $request && $request->hasSession() ) {
+			return $request->old( $value );
+		}
+	}
+
+}
