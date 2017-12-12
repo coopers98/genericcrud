@@ -9,7 +9,7 @@
 
                 <div class="form-body pal">
 
-                    <table class="table table-hover table-striped table-bordered ">
+                    <table class="table table-bordered ">
 
                         <?php
                         foreach ( $columns as $col => $col_info ) {
