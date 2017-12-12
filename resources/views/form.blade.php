@@ -79,7 +79,7 @@
                         break;
                 }
             }
-            if ( $readonly != '' ) {
+            if ( $readonly ) {
                 echo ' * readonly';
             }
 
