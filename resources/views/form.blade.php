@@ -7,9 +7,11 @@
             echo Form::label( $col, $col, [ 'class' => 'col-md-3 control-label' ] );
             echo '<div class="col-md-9">';
 
-            $readonly = '';
+            $readonly = false;
+            $options = ['class' => 'form-control'];
             if ( in_array( $col, $readonly_columns ) ) {
-                $readonly = [ 'readonly' => 'readonly' ];
+                $readonly = true;
+                $options[ 'readonly' ] ='readonly';
             }
 
 
@@ -26,13 +28,13 @@
                 //
                 switch ( $col_info['ShortType'] ) {
                     case '_id':
-                            echo 'MongoDB ID';
-                            break;
+                        echo 'MongoDB ID';
+                        break;
                     case 'int':
                     case 'float':
                     case 'double':
                     case 'decimal':
-                            echo Form::text( $col, crud_old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                        echo Form::number( $col, crud_old( $col ), $options );
                         break;
                     case 'string':
                         if ( isset( $col_info['length'] ) && ! is_numeric( $col_info['length'] ) ) {
@@ -44,33 +46,33 @@
                                 $option          = strtoupper( trim( $option, '\'' ) );
                                 $vals[ $option ] = $option;
                             }
-                            echo Form::select( $col, $vals, crud_old( $col ), [ 'class' => 'form-control' ] );
+                            echo Form::select( $col, $vals, crud_old( $col ), $options );
                         } else {
-                            echo Form::text( $col, crud_old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                            echo Form::text( $col, crud_old( $col ), $options );
                         }
                         break;
                     case 'text':
                     case 'mediumtext':
                     case 'longtext':
-                            echo Form::textarea( $col, crud_old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                        echo Form::textarea( $col, crud_old( $col ), $options );
                         break;
                     case 'boolean':
-                        echo form::checkbox( $col, $col, crud_old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                        echo form::checkbox( $col, $col, crud_old( $col ), $options );
                         break;
                     case 'timestamp':
                     case 'datetime':
                     case 'date':
                         echo '<div class="input-group">';
                         echo Form::text( $col, crud_old( $col ), [
-                                'class'            => 'datepicker-default form-control',
-                                'data-date-format' => 'mm/dd/yyyy',
-                                'placeholder'      => 'mm/dd/yyyy'
+                            'class'            => 'datepicker-default form-control',
+                            'data-date-format' => 'mm/dd/yyyy',
+                            'placeholder'      => 'mm/dd/yyyy'
                         ] );
                         echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div></div>';
                         break;
                     case 'enum' :
                         echo Form::select( $col, $col_info['enumVals'], crud_old( $col ),
-                                [ 'class' => 'form-control' ] );
+                            [ 'class' => 'form-control' ] );
                         break;
                     default:
                         echo $col_info['ShortType'] . ' NOT HANDLED *needs to be translated?*';
