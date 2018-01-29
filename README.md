@@ -49,9 +49,9 @@ class PostController extends Controller {
 	public function __construct() {
 		parent::__construct();
 
-        //
-        //  The name of the database table
-        //
+        	//
+        	//  The name of the database table
+        	//
 		$this->table_name   = 'posts';
 
 		//
@@ -63,24 +63,26 @@ class PostController extends Controller {
 		//  Optional overrides/settings
 		//
 		//  Ignored columns will not be shown in the views
-	    //  $this->ignored_columns = [ 'created_at', 'updated_at', 'deleted_at' ];
-	    //
-	    //  Readonly columns will not be allowed to be edited (such as id fields, set by default )
-	    //  $this->readonly_columns = [ 'id' ];
-	    //
-        //  Override the master template
+	    	//  $this->ignored_columns = [ 'created_at', 'updated_at', 'deleted_at' ];
+	    	//
+	    	//  Readonly columns will not be allowed to be edited (such as id fields, set by default )
+	    	//  $this->readonly_columns = [ 'id' ];
+	    	//
+        
+		//  Override the master template
 		//  $this->masterTemplate = 'some_layout';
-        //
-        //  You can override any of the blade views to customize the display of the dataset
-        //  $this->showView = 'post.show';
-	    //  $this->indexView = 'post.index';
-		//  $this->confirmDeleteView = 'post.confirm_delete';
-		//  $this->editView = 'post.edit';
-		//  $this->createView = 'post.create';
+        	//
+		
+        	//  You can override any of the blade views to customize the display of the dataset
+        	//  $this->showView 		= 'post.show';
+	    	//  $this->indexView 		= 'post.index';
+		//  $this->confirmDeleteView 	= 'post.confirm_delete';
+		//  $this->editView 		= 'post.edit';
+		//  $this->createView 		= 'post.create';
 
-        //
-        //  Call the populate columns function to load column data
-        //
+        	//
+        	//  Call the populate columns function to load column data
+        	//
 		$this->populateColumns();
 	}
 
