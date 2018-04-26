@@ -8,8 +8,11 @@
             echo '<div class="col-md-9">';
 
             $readonly = '';
+            $options = ['class' => 'form-control'];
             if ( in_array( $col, $readonly_columns ) ) {
-                $readonly = [ 'readonly' => 'readonly' ];
+                $readonly = true;
+                $options['readonly'] = 'readonly';
+
             }
 
 
@@ -32,7 +35,7 @@
                     case 'float':
                     case 'double':
                     case 'decimal':
-                            echo Form::text( $col, crud_old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                            echo Form::text( $col, crud_old( $col ), $options );
                         break;
                     case 'string':
                         if ( isset( $col_info['length'] ) && ! is_numeric( $col_info['length'] ) ) {
@@ -44,18 +47,18 @@
                                 $option          = strtoupper( trim( $option, '\'' ) );
                                 $vals[ $option ] = $option;
                             }
-                            echo Form::select( $col, $vals, crud_old( $col ), [ 'class' => 'form-control' ] );
+                            echo Form::select( $col, $vals, crud_old( $col ), $options );
                         } else {
-                            echo Form::text( $col, crud_old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                            echo Form::text( $col, crud_old( $col ), $options );
                         }
                         break;
                     case 'text':
                     case 'mediumtext':
                     case 'longtext':
-                            echo Form::textarea( $col, crud_old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                            echo Form::textarea( $col, crud_old( $col ), $options );
                         break;
                     case 'boolean':
-                        echo form::checkbox( $col, $col, crud_old( $col ), $readonly, [ 'class' => 'form-control' ] );
+                        echo form::checkbox( $col, $col, crud_old( $col ), $options );
                         break;
                     case 'timestamp':
                     case 'datetime':
