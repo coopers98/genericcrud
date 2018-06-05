@@ -12,7 +12,10 @@ composer require coopers98/genericcrud
 
 ### Service Provider
 
-In your app config, add the `GenericCRUD` to the providers array.
+If you are using Laravel 5.5+, and using 5.6+ of this module, there is no need to manually register the service
+provider.  However, if you are using an earlier version of Laravel, register the `GenericCRUDServiceProvider` in your `app`
+configuration file:
+
 
 ```php
 'providers' => [
