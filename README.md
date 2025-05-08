@@ -1,3 +1,13 @@
+### NOTICE!!!
+This is quite old at this point, and is now deprecated and no longer in use.  I am leaving this up and publically viewable for posterity sake.
+
+If you are using Laravel, I recommend using Nova [https://nova.laravel.com/] or Filament [https://filamentphp.com/] for general CMS use cases.
+
+
+
+
+
+
 ### GenericCRUD
 A Laravel GenericCRUD Controller trait and corresponding views to give a lightweight way to scaffold database tables in Laravel.
 
